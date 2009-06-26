@@ -16,7 +16,7 @@ using namespace dns;
  */
 int main(int argc, char** argv) {
 
-    cout << "Hello Cpp!" << endl;
+    cout << "DNS Server started." << endl;
 
     Application* application = new Application();
     application->run();
