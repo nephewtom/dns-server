@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>application.h</itemPath>
+      <itemPath>server.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,7 +14,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>application.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>server.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -25,7 +29,7 @@
     <conf name="Debug" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <compilerSet>Cygwin|Cygwin</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -34,8 +38,20 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="application.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="application.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="main.cpp">
         <itemTool>1</itemTool>
+      </item>
+      <item path="server.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="server.h">
+        <itemTool>3</itemTool>
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -59,8 +75,20 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="application.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="application.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="main.cpp">
         <itemTool>1</itemTool>
+      </item>
+      <item path="server.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="server.h">
+        <itemTool>3</itemTool>
       </item>
     </conf>
   </confs>
