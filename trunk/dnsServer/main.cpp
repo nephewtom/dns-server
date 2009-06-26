@@ -5,17 +5,21 @@
  * Created on 22 de junio de 2009, 15:37
  */
 
+#include "application.h"
+
 #include <iostream>
-#include <sys/socket.h>
+
 using namespace std;
+using namespace dns;
 /*
  *
  */
 int main(int argc, char** argv) {
 
     cout << "Hello Cpp!" << endl;
-    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    cout << "sockfd=" << sockfd << endl;
+    Application* application = new Application();
+    application->run();
+
     return 0;
 }
