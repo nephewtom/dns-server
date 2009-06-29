@@ -12,13 +12,13 @@ MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc-3.exe
-CCC=g++-3.exe
-CXX=g++-3.exe
+CC=gcc
+CCC=g++
+CXX=g++
 FC=
 
 # Macros
-PLATFORM=Cygwin-Windows
+PLATFORM=GNU-Windows
 
 # Include project Makefile
 include Makefile
