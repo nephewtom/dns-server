@@ -7,16 +7,11 @@
 
 #include "application.h"
 
-#include <iostream>
-
-using namespace std;
 using namespace dns;
 /*
  *
  */
 int main(int argc, char** argv) {
-
-    cout << "DNS Server started." << endl;
 
     Application* application = new Application();
     application->run();

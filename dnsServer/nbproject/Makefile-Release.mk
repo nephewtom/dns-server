@@ -28,7 +28,13 @@ OBJECTDIR=build/Release/${PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/server.o \
+	${OBJECTDIR}/resolver.o \
+	${OBJECTDIR}/message.o \
+	${OBJECTDIR}/request.o \
+	${OBJECTDIR}/response.o \
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/application.o
 
 # C Compiler Flags
 CFLAGS=
@@ -51,10 +57,40 @@ dist/Release/${PLATFORM}/dnsserver.exe: ${OBJECTFILES}
 	${MKDIR} -p dist/Release/${PLATFORM}
 	${LINK.cc} -o dist/Release/${PLATFORM}/dnsserver ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/server.o: server.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/server.o server.cpp
+
+${OBJECTDIR}/resolver.o: resolver.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/resolver.o resolver.cpp
+
+${OBJECTDIR}/message.o: message.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/message.o message.cpp
+
+${OBJECTDIR}/request.o: request.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/request.o request.cpp
+
+${OBJECTDIR}/response.o: response.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/response.o response.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/application.o: application.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/application.o application.cpp
 
 # Subprojects
 .build-subprojects:

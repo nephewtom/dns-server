@@ -5,21 +5,16 @@
  * Created on June 27, 2009, 11:20 AM
  */
 
+#include <iostream>
 #include "application.h"
 
 using namespace dns;
-
-Application::Application() {
-}
-
-Application::Application(const Application& orig) {
-}
-
-Application::~Application() {
-}
+using namespace std;
 
 void Application::run() throw() {
 
-    server.init();
-    server.run();
+    cout << "DNS Server started." << endl;
+
+    m_server.init();
+    m_server.run();
 }

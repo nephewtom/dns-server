@@ -2,25 +2,17 @@
  * File:   server.cpp
  * Author: tomas
  * 
- * Created on June 27, 2009, 11:58 AM
+ * Created on June 26, 2009, 11:58 AM
  */
 
 #include <iostream>
 #include <sys/socket.h>
 
 #include "server.h"
+#include "resolver.h"
 
 using namespace std;
 using namespace dns;
-
-Server::Server() {
-}
-
-Server::Server(const Server& orig) {
-}
-
-Server::~Server() {
-}
 
 void Server::init() throw () {
 
@@ -46,8 +38,10 @@ void Server::run() throw () {
     socklen_t addrLen = sizeof (struct sockaddr_in);
 
     while (true) {
-        int nbytes = recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *) & clientAddress, &addrLen);
-        cout << "nbytes=" << nbytes << endl;
-    }
+        int nbytes = recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *) &clientAddress, &addrLen);
 
+        m_request.decode(buffer, nbytes);
+        m_resolver.process(m_request, m_response);
+
+    }
 }
