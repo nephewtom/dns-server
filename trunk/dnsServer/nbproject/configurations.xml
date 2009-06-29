@@ -5,7 +5,10 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>application.h</itemPath>
+      <itemPath>message.h</itemPath>
       <itemPath>request.h</itemPath>
+      <itemPath>resolver.h</itemPath>
+      <itemPath>response.h</itemPath>
       <itemPath>server.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -16,9 +19,11 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>application.cpp</itemPath>
-      <itemPath>go.bash</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>message.cpp</itemPath>
       <itemPath>request.cpp</itemPath>
+      <itemPath>resolver.cpp</itemPath>
+      <itemPath>response.cpp</itemPath>
       <itemPath>server.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -27,13 +32,14 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
     <itemPath>dig-test.bash</itemPath>
+    <itemPath>go.bash</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <compilerSet>GNU|GNU</compilerSet>
+        <compilerSet>Cygwin|Cygwin</compilerSet>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -57,10 +63,28 @@
       <item path="main.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="message.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="message.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="request.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="request.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="resolver.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="resolver.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="response.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="response.h">
         <itemTool>3</itemTool>
       </item>
       <item path="server.cpp">
@@ -106,10 +130,28 @@
       <item path="main.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="message.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="message.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="request.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="request.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="resolver.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="resolver.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="response.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="response.h">
         <itemTool>3</itemTool>
       </item>
       <item path="server.cpp">
