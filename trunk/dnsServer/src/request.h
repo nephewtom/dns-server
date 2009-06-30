@@ -15,10 +15,11 @@ namespace dns {
 
 class Request : public Message {
 public:
-    Request();
-    virtual ~Request();
+    Request() { }
+    virtual ~Request() { }
 
     void decode(const char* buffer, int nbytes) throw();
+    const std::string& getQName() const throw () { return m_qName; }
     
 private:
     std::string m_qName;

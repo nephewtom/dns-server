@@ -7,57 +7,39 @@
 
 #include <iostream>
 #include <stdlib.h>
+
 #include "application.h"
+#include "exception.h"
 
 using namespace dns;
 using namespace std;
 
-void Application::getCommandLine(int argc, char** argv) throw (exception) {
-
-    cout << "argc=" << argc << endl;
+void Application::getCommandLine(int argc, char** argv) throw (Exception) {
 
     if (argc != 3) {
-        printUsage();
-        exception e;
+
+        string text("Usage: dnsServer <port> <hostsFile>\n");
+        text += "Example: dnsServer 9000 hosts\n";
+        Exception e(text);
         throw (e);
     }
 
-    for (int i = 0; i < argc; i++) {
-        cout << "Parsing arg " << i << ": " << argv[i] << endl;
+    m_port = atoi(argv[1]);
+    if (m_port < 1 || m_port > 65535) {
+        
+        string text("Error: Invalid port number.\n");
+        Exception e(text);
+        throw (e);
     }
+    cout << "m_argPort:" << m_port << endl;
 
-    int port = atoi(argv[1]);
-    if (port < 0 || port > 65535) {
-        exception e;
-        throw(e);
-    }
-
-    m_argFile.assign(argv[2]);
-    cout << " m_argFile: " << m_argFile << endl;
-    
-    //
-    //        if (param == ARG_PORT) {
-    //            m_argPort = atoi(argv[i++]);
-    //        }
-    //        else if (param == ARG_FILE) {
-    //            m_argFile = argv[i++];
-    //        }
-    //        else {
-    //            cout << " invalid param!"    << endl;
-    //        }
-    //    }
+    m_filename.assign(argv[2]);
+    cout << "m_argFile: " << m_filename << endl;
 }
 
-void Application::run() throw () {
+void Application::run() throw (Exception) {
 
-    cout << "DNS Server started." << endl;
-
-    m_server.init();
+    m_resolver.init(m_filename);
+    m_server.init(m_port);
     m_server.run();
-}
-
-void Application::printUsage() throw () {
-
-    cout << "Usage: dnsServer <port> <hostsFile>" << endl;
-    cout << "Example: dnsServer 9000 hosts.txt" << endl;
 }

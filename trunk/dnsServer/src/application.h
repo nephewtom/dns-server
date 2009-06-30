@@ -8,7 +8,7 @@
 #ifndef _DNS_APPLICATION_H
 #define	_DNS_APPLICATION_H
 
-#include <string>
+#include "exception.h"
 #include "server.h"
 #include "resolver.h"
 
@@ -17,17 +17,15 @@ namespace dns {
 class Application {
 public:
     Application() : m_server(m_resolver) { }
-    void getCommandLine(int argc, char** argv) throw (std::exception);
-    void run() throw();
+    void getCommandLine(int argc, char** argv) throw (Exception);
+    void run() throw(Exception);
 
 private:
-    int m_argPort;
-    std::string m_argFile;
+    int m_port;
+    std::string m_filename;
 
     Resolver m_resolver;
     Server m_server;
-
-    void printUsage() throw();
 };
 }
 

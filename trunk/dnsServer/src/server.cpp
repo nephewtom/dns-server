@@ -6,7 +6,9 @@
  */
 
 #include <iostream>
+#include <cstring>
 #include <sys/socket.h>
+#include <errno.h>
 
 #include "server.h"
 #include "resolver.h"
@@ -14,24 +16,29 @@
 using namespace std;
 using namespace dns;
 
-void Server::init() throw () {
+void Server::init(int port) throw (Exception) {
 
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     cout << "sockfd=" << sockfd << endl;
 
     m_address.sin_family = AF_INET;
     m_address.sin_addr.s_addr = INADDR_ANY;
-    m_address.sin_port = htons(m_defaul_port);
+    m_address.sin_port = htons(port);
 
     int rbind = bind(sockfd, (struct sockaddr *) & m_address, sizeof (struct sockaddr_in));
+    
     if (rbind != 0) {
-        cout << "rbind=" << rbind << endl;
-        perror("Bind Error");
+        string text("Could not bind: ");
+        text += strerror(errno);
+        Exception e(text);
+        throw(e);
     }
 
 }
 
 void Server::run() throw () {
+
+    cout << "DNS Server running..." << endl;
 
     char buffer[MAX_BUFFER_SIZE];
     struct sockaddr_in clientAddress;

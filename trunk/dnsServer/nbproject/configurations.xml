@@ -35,6 +35,8 @@
     </logicalFolder>
     <itemPath>dig-test.bash</itemPath>
     <itemPath>go.bash</itemPath>
+    <itemPath>hosts</itemPath>
+    <itemPath>README</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -51,10 +53,16 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="README">
+        <itemTool>3</itemTool>
+      </item>
       <item path="dig-test.bash">
         <itemTool>3</itemTool>
       </item>
       <item path="go.bash">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="hosts">
         <itemTool>3</itemTool>
       </item>
       <item path="src/application.cpp">
@@ -124,10 +132,16 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="README">
+        <itemTool>3</itemTool>
+      </item>
       <item path="dig-test.bash">
         <itemTool>3</itemTool>
       </item>
       <item path="go.bash">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="hosts">
         <itemTool>3</itemTool>
       </item>
       <item path="src/application.cpp">
