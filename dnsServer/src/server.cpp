@@ -21,7 +21,7 @@ void Server::init() throw () {
 
     m_address.sin_family = AF_INET;
     m_address.sin_addr.s_addr = INADDR_ANY;
-    m_address.sin_port = htons(m_port);
+    m_address.sin_port = htons(m_defaul_port);
 
     int rbind = bind(sockfd, (struct sockaddr *) & m_address, sizeof (struct sockaddr_in));
     if (rbind != 0) {
