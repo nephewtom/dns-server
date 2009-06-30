@@ -8,9 +8,11 @@
 #ifndef _DNS_RESPONSE_H
 #define	_DNS_RESPONSE_H
 
+#include "message.h"
+
 namespace dns {
 
-class Response {
+class Response : public Message {
 public:
     Response();
     virtual ~Response();

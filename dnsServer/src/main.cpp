@@ -5,10 +5,10 @@
  * Created on 26 de junio de 2009, 15:37
  */
 
-#include <exception>
 #include <iostream>
+
 #include "application.h"
-#include "logger.h"
+#include "exception.h"
 
 using namespace std;
 using namespace dns;
@@ -22,8 +22,8 @@ int main(int argc, char** argv) {
         application->getCommandLine(argc, argv);
         application->run();
     }
-    catch (exception& e) {
-        e.what();
+    catch (Exception& e) {
+        cout << e.what() << endl;
     }
 
     return 0;

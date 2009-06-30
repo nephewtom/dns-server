@@ -9,6 +9,7 @@
 #define	_DNS_SERVER_H
 
 #include <netinet/in.h>
+#include "exception.h"
 #include "request.h"
 #include "response.h"
 
@@ -21,7 +22,7 @@ public:
     Server(Resolver& resolver) : m_resolver(resolver) { }
     virtual ~Server() { }
 
-    void init() throw();
+    void init(int port) throw(Exception);
     void run() throw();
     
 private:

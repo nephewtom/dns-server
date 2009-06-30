@@ -11,12 +11,6 @@
 using namespace std;
 using namespace dns;
 
-Request::Request() {
-}
-
-Request::~Request() {
-}
-
 void Request::decode(const char* buffer, int nbytes) throw() {
 
     print_buffer(buffer, nbytes);
@@ -40,7 +34,7 @@ void Request::decode(const char* buffer, int nbytes) throw() {
 
     buffer += 2;
     m_qClass = get16bits(buffer);
-    cout << "Qclass: " << m_qClass << endl << noshowbase ;
+    cout << "Qclass: " << m_qClass << endl << noshowbase << endl;
 }
 
 
