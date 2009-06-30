@@ -25,7 +25,7 @@ public:
     void run() throw();
     
 private:
-    static const int m_port = 53;
+    static const int m_defaul_port = 53;
     static const int MAX_BUFFER_SIZE = 1024;
 
     struct sockaddr_in m_address;

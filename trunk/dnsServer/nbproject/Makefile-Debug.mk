@@ -18,7 +18,7 @@ CXX=g++
 FC=
 
 # Macros
-PLATFORM=GNU-Windows
+PLATFORM=GNU-Linux-x86
 
 # Include project Makefile
 include Makefile
@@ -28,13 +28,14 @@ OBJECTDIR=build/Debug/${PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/server.o \
-	${OBJECTDIR}/resolver.o \
-	${OBJECTDIR}/message.o \
-	${OBJECTDIR}/request.o \
-	${OBJECTDIR}/response.o \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/application.o
+	${OBJECTDIR}/src/response.o \
+	${OBJECTDIR}/src/main.o \
+	${OBJECTDIR}/src/message.o \
+	${OBJECTDIR}/src/logger.o \
+	${OBJECTDIR}/src/server.o \
+	${OBJECTDIR}/src/application.o \
+	${OBJECTDIR}/src/resolver.o \
+	${OBJECTDIR}/src/request.o
 
 # C Compiler Flags
 CFLAGS=
@@ -51,46 +52,50 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	${MAKE}  -f nbproject/Makefile-Debug.mk dist/Debug/${PLATFORM}/dnsserver.exe
+	${MAKE}  -f nbproject/Makefile-Debug.mk dnsserver
 
-dist/Debug/${PLATFORM}/dnsserver.exe: ${OBJECTFILES}
-	${MKDIR} -p dist/Debug/${PLATFORM}
-	${LINK.cc} -o dist/Debug/${PLATFORM}/dnsserver ${OBJECTFILES} ${LDLIBSOPTIONS} 
+dnsserver: ${OBJECTFILES}
+	${LINK.cc} -o dnsserver ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/server.o: server.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/response.o: src/response.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/server.o server.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/response.o src/response.cpp
 
-${OBJECTDIR}/resolver.o: resolver.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/main.o: src/main.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/resolver.o resolver.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
 
-${OBJECTDIR}/message.o: message.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/message.o: src/message.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/message.o message.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/message.o src/message.cpp
 
-${OBJECTDIR}/request.o: request.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/logger.o: src/logger.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/request.o request.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/logger.o src/logger.cpp
 
-${OBJECTDIR}/response.o: response.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/server.o: src/server.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/response.o response.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/server.o src/server.cpp
 
-${OBJECTDIR}/main.o: main.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/application.o: src/application.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/application.o src/application.cpp
 
-${OBJECTDIR}/application.o: application.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/resolver.o: src/resolver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/application.o application.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/resolver.o src/resolver.cpp
+
+${OBJECTDIR}/src/request.o: src/request.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/request.o src/request.cpp
 
 # Subprojects
 .build-subprojects:
@@ -98,7 +103,7 @@ ${OBJECTDIR}/application.o: application.cpp
 # Clean Targets
 .clean-conf:
 	${RM} -r build/Debug
-	${RM} dist/Debug/${PLATFORM}/dnsserver.exe
+	${RM} dnsserver
 
 # Subprojects
 .clean-subprojects:

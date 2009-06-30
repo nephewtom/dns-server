@@ -6,10 +6,10 @@
 
 # Macros
 TOP=`pwd`
-PLATFORM=Cygwin-Windows
+PLATFORM=GNU-Linux-x86
 TMPDIR=build/Debug/${PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/Debug/${PLATFORM}/dnsserver
+OUTPUT_PATH=dnsserver
 OUTPUT_BASENAME=dnsserver
 PACKAGE_TOP_DIR=dnsserver/
 
@@ -57,7 +57,7 @@ mkdir -p ${TMPDIR}
 # Copy files and create directories and links
 cd "${TOP}"
 makeDirectory ${TMPDIR}/dnsserver/bin
-copyFileToTmpDir "${OUTPUT_PATH}.exe" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
+copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file

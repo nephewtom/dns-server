@@ -12,9 +12,9 @@ MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc-3.exe
-CCC=g++-3.exe
-CXX=g++-3.exe
+CC=
+CCC=
+CXX=
 FC=
 
 # Macros
@@ -28,13 +28,14 @@ OBJECTDIR=build/Release/${PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/server.o \
-	${OBJECTDIR}/resolver.o \
-	${OBJECTDIR}/message.o \
-	${OBJECTDIR}/request.o \
-	${OBJECTDIR}/response.o \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/application.o
+	${OBJECTDIR}/src/response.o \
+	${OBJECTDIR}/src/main.o \
+	${OBJECTDIR}/src/message.o \
+	${OBJECTDIR}/src/logger.o \
+	${OBJECTDIR}/src/server.o \
+	${OBJECTDIR}/src/application.o \
+	${OBJECTDIR}/src/resolver.o \
+	${OBJECTDIR}/src/request.o
 
 # C Compiler Flags
 CFLAGS=
@@ -57,40 +58,45 @@ dist/Release/${PLATFORM}/dnsserver.exe: ${OBJECTFILES}
 	${MKDIR} -p dist/Release/${PLATFORM}
 	${LINK.cc} -o dist/Release/${PLATFORM}/dnsserver ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
-${OBJECTDIR}/server.o: server.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/response.o: src/response.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/server.o server.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/response.o src/response.cpp
 
-${OBJECTDIR}/resolver.o: resolver.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/main.o: src/main.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/resolver.o resolver.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/main.o src/main.cpp
 
-${OBJECTDIR}/message.o: message.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/message.o: src/message.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/message.o message.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/message.o src/message.cpp
 
-${OBJECTDIR}/request.o: request.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/logger.o: src/logger.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/request.o request.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/logger.o src/logger.cpp
 
-${OBJECTDIR}/response.o: response.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/server.o: src/server.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/response.o response.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/server.o src/server.cpp
 
-${OBJECTDIR}/main.o: main.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/application.o: src/application.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/application.o src/application.cpp
 
-${OBJECTDIR}/application.o: application.cpp 
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/resolver.o: src/resolver.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/application.o application.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/resolver.o src/resolver.cpp
+
+${OBJECTDIR}/src/request.o: src/request.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/request.o src/request.cpp
 
 # Subprojects
 .build-subprojects:

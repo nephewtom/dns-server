@@ -12,5 +12,7 @@ using namespace std;
 using namespace dns;
 
 void Resolver::process(const Request& request, Response& response) throw() {
+
     cout << "Resolver::process()" << endl;
+    
 }
