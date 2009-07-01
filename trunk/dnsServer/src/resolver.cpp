@@ -5,12 +5,16 @@
  * Created on 29 de junio de 2009, 3:47
  */
 
+#include "message.h"
+#include "response.h"
+
+
 #include <string>
 #include <iostream>
 #include <fstream>
 
 #include "resolver.h"
-#include "request.h"
+#include "query.h"
 
 using namespace std;
 using namespace dns;
@@ -27,7 +31,7 @@ void Resolver::init(const std::string& filename) throw (Exception) {
         throw (e);
     }
 
-    m_record_list = new Record();
+    //m_record_list = new Record();
 
     string line;
     while (!file.eof()) {
@@ -63,21 +67,31 @@ void Resolver::add(Record* newone) throw() {
 
     cout << "Resolver::add()" << endl;
 
+    cout << "Adding Record: " << newone->ipAddress.data();
+    cout << "-" << newone->domainName.data() << endl;
+
     Record* record = m_record_list;
+    if (record == 0) {
+        m_record_list = newone;
+        return;
+    }
 
     while (record->next != 0) {
         record = record->next;
     }
     record->next = newone;
-
-    cout << "Added Record: " << newone->ipAddress.data();
-    cout << "-" << newone->domainName.data() << endl;
 }
 
 void Resolver::print_records() throw() {
 
     cout << "PRINT RECORDS:" << endl;
-    Record* record = m_record_list->next;
+
+    Record* record = m_record_list;
+    if (record == 0) {
+        cout << "No records on list." << endl;
+        return;
+    }
+
     while (record != 0) {
         cout << "Record: " << record->ipAddress.data();
         cout << " - " << record->domainName.data() << endl;
@@ -87,9 +101,9 @@ void Resolver::print_records() throw() {
 
 const string Resolver::find(string& ipAddress) throw () {
 
-    Record* record = m_record_list->next;
     string domainName;
 
+    Record* record = m_record_list;
     while (record != 0) {
         
         if (record->ipAddress == ipAddress) {
@@ -103,17 +117,24 @@ const string Resolver::find(string& ipAddress) throw () {
     return domainName;
 }
 
-void Resolver::process(const Request& request, Response& response) throw () {
+void Resolver::process(const Query& query, Response& response) throw () {
 
     cout << "Resolver::process()" << endl;
 
-    string ipAddress = request.getQName();
-    string domainName = find(ipAddress);
+    string ipAddress = query.getQName();
+    string domainName = find( ipAddress );
 
     cout << "domainName:" << domainName << endl;
-    
-//    if (domainName.empty()) {
-//
-//    }
+
+    response.setID( query.getID() );
+    response.setAnCount(1);
+
+    if (domainName.empty()) {
+        response.setRCode(Response::NameError);
+    }
+    else {
+        response.setRCode(Response::Ok);
+        response.setName(domainName);
+    }
 }
 

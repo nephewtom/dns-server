@@ -18,14 +18,15 @@ using namespace dns;
 
 void Server::init(int port) throw (Exception) {
 
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    cout << "sockfd=" << sockfd << endl;
+    m_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    cout << "sockfd=" << m_sockfd << endl;
 
     m_address.sin_family = AF_INET;
     m_address.sin_addr.s_addr = INADDR_ANY;
     m_address.sin_port = htons(port);
 
-    int rbind = bind(sockfd, (struct sockaddr *) & m_address, sizeof (struct sockaddr_in));
+    int rbind = bind(m_sockfd, (struct sockaddr *) & m_address,
+                     sizeof (struct sockaddr_in));
     
     if (rbind != 0) {
         string text("Could not bind: ");
@@ -40,15 +41,22 @@ void Server::run() throw () {
 
     cout << "DNS Server running..." << endl;
 
-    char buffer[MAX_BUFFER_SIZE];
+    char buffer[BUFFER_SIZE];
     struct sockaddr_in clientAddress;
     socklen_t addrLen = sizeof (struct sockaddr_in);
 
     while (true) {
-        int nbytes = recvfrom(sockfd, buffer, MAX_BUFFER_SIZE, 0, (struct sockaddr *) &clientAddress, &addrLen);
 
-        m_request.decode(buffer, nbytes);
-        m_resolver.process(m_request, m_response);
+        int nbytes = recvfrom(m_sockfd, buffer, BUFFER_SIZE, 0,
+                     (struct sockaddr *) &clientAddress, &addrLen);
 
+        m_query.decode(buffer, nbytes);
+        m_resolver.process(m_query, m_response);
+
+        memset(buffer, 0, BUFFER_SIZE);
+        nbytes = m_response.code(buffer);
+
+        sendto(m_sockfd, buffer, nbytes, 0, (struct sockaddr *) &clientAddress,
+               addrLen);
     }
 }

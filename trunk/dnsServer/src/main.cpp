@@ -11,18 +11,20 @@
 #include "exception.h"
 
 using namespace std;
-using namespace dns;
 /*
  *
  */
 int main(int argc, char** argv) {
 
     try {
-        Application* application = new Application();
-        application->getCommandLine(argc, argv);
+        dns::Application* application = new dns::Application();
+        application->parse_arguments(argc, argv);
         application->run();
     }
-    catch (Exception& e) {
+    catch (dns::Exception& e) {
+        cout << e.what() << endl;
+    }
+    catch (exception& e) {
         cout << e.what() << endl;
     }
 
