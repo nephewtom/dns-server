@@ -12,37 +12,38 @@
 
 namespace dns {
 
-    class Request;
-    class Response;
+class Query;
+class Response;
 
-    class Resolver {
-    public:
+class Resolver {
+public:
 
-        Resolver() : m_record_list(0) { }
+    Resolver() : m_record_list(0) { }
+    virtual ~Resolver() { }
 
-        virtual ~Resolver() { }
+    void init(const std::string& filename) throw (Exception);
+    void process(const Query& query, Response& response) throw ();
 
-        void init(const std::string& filename) throw (Exception);
-        void process(const Request& request, Response& response) throw ();
+private:
+    
+    void store(const std::string& line) throw ();
 
-    private:
-        void store(const std::string& line) throw ();
+    struct Record {
+        Record(std::string& ip, std::string& domain) : ipAddress(ip),
+               domainName(domain), next(0) { }
+        
+        Record() : next(0) { }
 
-        struct Record {
-            Record(std::string& ip, std::string& domain) : ipAddress(ip), 
-                    domainName(domain), next(0) { }
-            Record() : next(0) { }
-            
-            std::string ipAddress;
-            std::string domainName;
-            Record* next;
-        };
-
-        Record* m_record_list;
-        void add(Record* record) throw ();
-        const std::string find(std::string& ipAddress) throw ();
-        void print_records() throw ();
+        std::string ipAddress;
+        std::string domainName;
+        Record* next;
     };
+    Record* m_record_list;
+
+    void add(Record* record) throw ();
+    const std::string find(std::string& ipAddress) throw ();
+    void print_records() throw ();
+};
 }
 #endif	/* _RESOLVER_H */
 

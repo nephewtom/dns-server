@@ -10,7 +10,7 @@
 
 #include <netinet/in.h>
 #include "exception.h"
-#include "request.h"
+#include "query.h"
 #include "response.h"
 
 namespace dns {
@@ -19,20 +19,21 @@ class Resolver;
 
 class Server {
 public:
-    Server(Resolver& resolver) : m_resolver(resolver) { }
+    Server(Resolver& resolver) : m_resolver(resolver)
+        { }
+
     virtual ~Server() { }
 
     void init(int port) throw(Exception);
     void run() throw();
     
 private:
-    static const int m_defaul_port = 53;
-    static const int MAX_BUFFER_SIZE = 1024;
+    static const int BUFFER_SIZE = 1024;
 
     struct sockaddr_in m_address;
-    int sockfd;
+    int m_sockfd;
 
-    Request m_request;
+    Query m_query;
     Response m_response;
 
     Resolver& m_resolver;

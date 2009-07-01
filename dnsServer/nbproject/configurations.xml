@@ -7,7 +7,7 @@
       <itemPath>src/application.h</itemPath>
       <itemPath>src/logger.h</itemPath>
       <itemPath>src/message.h</itemPath>
-      <itemPath>src/request.h</itemPath>
+      <itemPath>src/query.h</itemPath>
       <itemPath>src/resolver.h</itemPath>
       <itemPath>src/response.h</itemPath>
       <itemPath>src/server.h</itemPath>
@@ -23,7 +23,7 @@
       <itemPath>src/logger.cpp</itemPath>
       <itemPath>src/main.cpp</itemPath>
       <itemPath>src/message.cpp</itemPath>
-      <itemPath>src/request.cpp</itemPath>
+      <itemPath>src/query.cpp</itemPath>
       <itemPath>src/resolver.cpp</itemPath>
       <itemPath>src/response.cpp</itemPath>
       <itemPath>src/server.cpp</itemPath>
@@ -86,10 +86,10 @@
       <item path="src/message.h">
         <itemTool>3</itemTool>
       </item>
-      <item path="src/request.cpp">
+      <item path="src/query.cpp">
         <itemTool>1</itemTool>
       </item>
-      <item path="src/request.h">
+      <item path="src/query.h">
         <itemTool>3</itemTool>
       </item>
       <item path="src/resolver.cpp">
@@ -165,10 +165,10 @@
       <item path="src/message.h">
         <itemTool>3</itemTool>
       </item>
-      <item path="src/request.cpp">
+      <item path="src/query.cpp">
         <itemTool>1</itemTool>
       </item>
-      <item path="src/request.h">
+      <item path="src/query.h">
         <itemTool>3</itemTool>
       </item>
       <item path="src/resolver.cpp">

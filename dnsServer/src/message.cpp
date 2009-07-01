@@ -15,31 +15,41 @@ using namespace std;
 
 void Message::decode_hdr(const char* buffer) throw () {
 
-    m_ID = get16bits(buffer);
-    cout << "ID: " << showbase << hex << m_ID << endl;
-    buffer += 2;
+    m_id = get16bits(buffer);
 
-    int parameters = get16bits(buffer);
-    m_QR = parameters & 0x80;
-    m_opcode = parameters & 0x78;
-    cout << "parameters: " << parameters;
-    cout << " [ QR: " << m_QR << " opCode: " << m_opcode << " ]" << endl;
-    buffer += 2;
+    uint fields = get16bits(buffer);
+    m_qr = fields & QR_MASK;
+    m_opcode = fields & OPCODE_MASK;
+    // TODO: Extract rest of fields
 
     m_qdCount = get16bits(buffer);
-    cout << "QDcount: " << m_qdCount << endl;
-    buffer += 2;
-
     m_anCount = get16bits(buffer);
-    cout << "ANcount: " << m_anCount << endl;
-    buffer += 2;
-
     m_nsCount = get16bits(buffer);
-    cout << "NScount: " << m_nsCount << endl;
-    buffer += 2;
-
     m_arCount = get16bits(buffer);
+
+    cout << "ID: " << showbase << hex << m_id << endl;
+    cout << "fields: " << fields;
+    cout << " [ QR: " << m_qr << " opCode: " << m_opcode << " ]" << endl;
+    cout << "QDcount: " << m_qdCount << endl;
+    cout << "ANcount: " << m_anCount << endl;
+    cout << "NScount: " << m_nsCount << endl;
     cout << "ARcount: " << m_arCount << endl;
+}
+
+void Message::code_hdr(char* buffer) throw () {
+
+    put16bits(buffer, m_id);
+
+    int fields = (m_qr << 15);
+    fields += (m_opcode << 14);
+    //...
+    fields += m_rcode;
+    put16bits(buffer, fields);
+
+    put16bits(buffer, m_qdCount);
+    put16bits(buffer, m_anCount);
+    put16bits(buffer, m_nsCount);
+    put16bits(buffer, m_arCount);
 }
 
 void Message::print_buffer(const char* buffer, int size) throw () {
@@ -51,18 +61,35 @@ void Message::print_buffer(const char* buffer, int size) throw () {
         if ((i % 10) == 0) {
             cout << endl << setw(2) << i << ": ";
         }
-        unsigned char c = buffer[i];
+        uchar c = buffer[i];
         cout << hex << setw(2) << int(c) << " " << dec;
     }
     cout << endl << setfill(' ');
     cout << "---------------------------------" << endl;
 }
 
-int Message::get16bits(const char* buffer) throw () {
+int Message::get16bits(const char*& buffer) throw () {
 
-    int value = static_cast<unsigned char> (buffer[0]);
+    int value = static_cast<uchar> (buffer[0]);
     value = value << 8;
-    value += static_cast<unsigned char> (buffer[1]);
-    //value = ntohs(value);
+    value += static_cast<uchar> (buffer[1]);
+    buffer += 2;
+
     return value;
+}
+
+void Message::put16bits(char*& buffer, uint value) throw () {
+
+    buffer[0] = (value & 0xFF00) >> 8;
+    buffer[1] = value & 0xFF;
+    buffer += 2;
+}
+
+void Message::put32bits(char*& buffer, ulong value) throw () {
+
+    buffer[0] = (value & 0xFF000000) >> 24;
+    buffer[1] = (value & 0xFF0000) >> 16;
+    buffer[2] = (value & 0xFF00) >> 16;
+    buffer[3] = (value & 0xFF) >> 16;
+    buffer += 4;
 }

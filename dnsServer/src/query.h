@@ -13,18 +13,21 @@
 
 namespace dns {
 
-class Request : public Message {
+class Query : public Message {
 public:
-    Request() { }
-    virtual ~Request() { }
+    Query() : Message(Message::Query) { }
+    virtual ~Query() { }
 
-    void decode(const char* buffer, int nbytes) throw();
     const std::string& getQName() const throw () { return m_qName; }
+
+    void decode(const char* buffer, int size) throw();
     
 private:
     std::string m_qName;
-    int m_qType;
-    int m_qClass;
+    uint m_qType;
+    uint m_qClass;
+
+    void decode_qname(const char*& buffer) throw();
 };
 }
 #endif	/* _REQUEST_H */

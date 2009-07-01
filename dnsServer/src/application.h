@@ -17,7 +17,7 @@ namespace dns {
 class Application {
 public:
     Application() : m_server(m_resolver) { }
-    void getCommandLine(int argc, char** argv) throw (Exception);
+    void parse_arguments(int argc, char** argv) throw (Exception);
     void run() throw(Exception);
 
 private:

@@ -14,7 +14,7 @@
 using namespace dns;
 using namespace std;
 
-void Application::getCommandLine(int argc, char** argv) throw (Exception) {
+void Application::parse_arguments(int argc, char** argv) throw (Exception) {
 
     if (argc != 3) {
 
@@ -31,9 +31,10 @@ void Application::getCommandLine(int argc, char** argv) throw (Exception) {
         Exception e(text);
         throw (e);
     }
-    cout << "m_argPort:" << m_port << endl;
 
     m_filename.assign(argv[2]);
+
+    cout << "m_argPort:" << m_port << endl;
     cout << "m_argFile: " << m_filename << endl;
 }
 
