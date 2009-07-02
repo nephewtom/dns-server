@@ -5,16 +5,14 @@
  * Created on 29 de junio de 2009, 3:47
  */
 
-#include "message.h"
-#include "response.h"
-
-
 #include <string>
 #include <iostream>
 #include <fstream>
 
 #include "resolver.h"
+#include "response.h"
 #include "query.h"
+#include "resource.h"
 
 using namespace std;
 using namespace dns;
@@ -128,6 +126,8 @@ void Resolver::process(const Query& query, Response& response) throw () {
 
     response.setID( query.getID() );
     response.setAnCount(1);
+    response.setType( query.getQType() );
+    response.setClass( query.getQClass() );
 
     if (domainName.empty()) {
         response.setRCode(Response::NameError);

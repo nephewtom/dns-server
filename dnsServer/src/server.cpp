@@ -51,8 +51,11 @@ void Server::run() throw () {
                      (struct sockaddr *) &clientAddress, &addrLen);
 
         m_query.decode(buffer, nbytes);
+        m_query.asString();
+
         m_resolver.process(m_query, m_response);
 
+        m_response.asString();
         memset(buffer, 0, BUFFER_SIZE);
         nbytes = m_response.code(buffer);
 
