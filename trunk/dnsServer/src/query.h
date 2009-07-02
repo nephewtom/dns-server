@@ -9,6 +9,7 @@
 #define	_DNS_REQUEST_H
 
 #include <string>
+
 #include "message.h"
 
 namespace dns {
@@ -19,6 +20,9 @@ public:
     virtual ~Query() { }
 
     const std::string& getQName() const throw () { return m_qName; }
+    const uint getQType() const throw () { return m_qType; }
+    const uint getQClass() const throw () { return m_qClass; }
+    std::string asString() const throw();
 
     void decode(const char* buffer, int size) throw();
     

@@ -8,6 +8,8 @@
 #ifndef _DNS_MESSAGE_H
 #define	_DNS_MESSAGE_H
 
+#include <string>
+
 namespace dns {
 
 typedef unsigned char uchar;
@@ -51,6 +53,7 @@ protected:
     void put32bits(char*& buffer, ulong value) throw ();
 
     void print_buffer(const char* buffer, int size) throw();
+    std::string asString() const throw();
     
 private:
     static const uint QR_MASK = 0x80;

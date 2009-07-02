@@ -8,10 +8,25 @@
 #include <iostream>
 #include <iomanip>
 #include <netinet/in.h>
+
 #include "message.h"
 
 using namespace dns;
 using namespace std;
+
+string Message::asString() const throw() {
+
+    cout << "ID: " << showbase << hex << m_id << endl;
+    cout << "fields: [ QR: " << m_qr << " opCode: " << m_opcode << " ]" << endl;
+    cout << "QDcount: " << m_qdCount << endl;
+    cout << "ANcount: " << m_anCount << endl;
+    cout << "NScount: " << m_nsCount << endl;
+    cout << "ARcount: " << m_arCount << endl;
+
+    cout << "From Message::asString()" << endl;
+
+    return string();
+}
 
 void Message::decode_hdr(const char* buffer) throw () {
 
@@ -26,14 +41,6 @@ void Message::decode_hdr(const char* buffer) throw () {
     m_anCount = get16bits(buffer);
     m_nsCount = get16bits(buffer);
     m_arCount = get16bits(buffer);
-
-    cout << "ID: " << showbase << hex << m_id << endl;
-    cout << "fields: " << fields;
-    cout << " [ QR: " << m_qr << " opCode: " << m_opcode << " ]" << endl;
-    cout << "QDcount: " << m_qdCount << endl;
-    cout << "ANcount: " << m_anCount << endl;
-    cout << "NScount: " << m_nsCount << endl;
-    cout << "ARcount: " << m_arCount << endl;
 }
 
 void Message::code_hdr(char* buffer) throw () {
@@ -54,7 +61,7 @@ void Message::code_hdr(char* buffer) throw () {
 
 void Message::print_buffer(const char* buffer, int size) throw () {
 
-    cout << endl << "Buffer: " << dec << size << " bytes read" << endl;
+    cout << endl << "Buffer: " << size << " bytes" << endl;
     cout << "---------------------------------" << setfill('0');
 
     for (int i = 0; i < size; i++) {
