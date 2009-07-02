@@ -1,5 +1,5 @@
 /* 
- * File:   RR.h
+ * File:   resource.h
  * Author: tomas
  *
  * Created on June 4, 2009, 1:55 AM
