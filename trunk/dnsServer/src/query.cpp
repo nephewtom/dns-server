@@ -1,11 +1,13 @@
 /* 
- * File:   request.cpp
- * Author: torti
+ * File:   query.cpp
+ * Author: tomas
  * 
  * Created on 26 de junio de 2009, 13:01
  */
 #include <iostream>
+#include <sstream>
 
+#include "logger.h"
 #include "query.h"
 
 using namespace std;
@@ -13,18 +15,21 @@ using namespace dns;
 
 string Query::asString() const throw() {
 
-    Message::asString();
+    ostringstream text;
+    text << endl << "QUERY { ";
+    text << Message::asString();
+    text << "\tQname: " << m_qName << endl;
+    text << "\tQtype: " << m_qType << endl;
+    text << "\tQclass: " << m_qClass;
+    text << " }" << noshowbase << dec;
 
-    cout << "From Query::asString()" << endl;
-
-    cout << "Qname: " << m_qName << endl;
-    cout << "Qtype: " << m_qType << endl;
-    cout << "Qclass: " << m_qClass << endl << noshowbase << dec;
-
-    return string();
+    return text.str();
 }
 
 void Query::decode(const char* buffer, int size) throw() {
+
+    Logger& logger = Logger::instance();
+    logger.trace("Query::decode()");
 
     print_buffer(buffer, size);
 

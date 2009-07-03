@@ -9,7 +9,6 @@
       <itemPath>src/message.h</itemPath>
       <itemPath>src/query.h</itemPath>
       <itemPath>src/resolver.h</itemPath>
-      <itemPath>src/resource.h</itemPath>
       <itemPath>src/response.h</itemPath>
       <itemPath>src/server.h</itemPath>
     </logicalFolder>
@@ -99,9 +98,6 @@
       <item path="src/resolver.h">
         <itemTool>3</itemTool>
       </item>
-      <item path="src/resource.h">
-        <itemTool>3</itemTool>
-      </item>
       <item path="src/response.cpp">
         <itemTool>1</itemTool>
       </item>
@@ -179,9 +175,6 @@
         <itemTool>1</itemTool>
       </item>
       <item path="src/resolver.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="src/resource.h">
         <itemTool>3</itemTool>
       </item>
       <item path="src/response.cpp">

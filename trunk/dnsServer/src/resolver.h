@@ -1,6 +1,6 @@
 /* 
  * File:   resolver.h
- * Author: torti
+ * Author: tomas
  *
  * Created on 29 de junio de 2009, 3:47
  */
@@ -19,7 +19,7 @@ class Resolver {
 public:
 
     Resolver() : m_record_list(0) { }
-    virtual ~Resolver() { }
+    virtual ~Resolver() { deleteList(); }
 
     void init(const std::string& filename) throw (Exception);
     void process(const Query& query, Response& response) throw ();
@@ -41,8 +41,11 @@ private:
     Record* m_record_list;
 
     void add(Record* record) throw ();
-    const std::string find(std::string& ipAddress) throw ();
+    void deleteList() throw();
     void print_records() throw ();
+
+    std::string convert(const std::string& qName) throw();
+    const std::string find(const std::string& ipAddress) throw ();
 };
 }
 #endif	/* _RESOLVER_H */

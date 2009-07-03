@@ -2,7 +2,7 @@
  * File:   exception.h
  * Author: tomas
  *
- * Created on July 1, 2009, 4:15 AM
+ * Created on July 1, 2009, 16:15 PM
  */
 
 #ifndef _DNS_EXCEPTION_H

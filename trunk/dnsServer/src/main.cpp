@@ -1,6 +1,6 @@
 /*
  * File:   main.cpp
- * Author: torti
+ * Author: tomas
  *
  * Created on 26 de junio de 2009, 15:37
  */

@@ -10,6 +10,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 
+#include "logger.h"
 #include "server.h"
 #include "resolver.h"
 
@@ -18,8 +19,10 @@ using namespace dns;
 
 void Server::init(int port) throw (Exception) {
 
+    Logger& logger = Logger::instance();
+    logger.trace("Server::init()");
+
     m_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    cout << "sockfd=" << m_sockfd << endl;
 
     m_address.sin_family = AF_INET;
     m_address.sin_addr.s_addr = INADDR_ANY;
@@ -35,10 +38,14 @@ void Server::init(int port) throw (Exception) {
         throw(e);
     }
 
+    cout << "Listening in port: " << port << ", sockfd: " << m_sockfd << endl;
 }
 
 void Server::run() throw () {
 
+    Logger& logger = Logger::instance();
+    logger.trace("Server::run()");
+    
     cout << "DNS Server running..." << endl;
 
     char buffer[BUFFER_SIZE];

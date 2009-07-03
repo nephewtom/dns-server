@@ -1,14 +1,16 @@
 /* 
  * File:   message.cpp
- * Author: torti
+ * Author: tomas
  * 
  * Created on 29 de junio de 2009, 17:39
  */
 
 #include <iostream>
+#include <sstream>
 #include <iomanip>
 #include <netinet/in.h>
 
+#include "logger.h"
 #include "message.h"
 
 using namespace dns;
@@ -16,16 +18,15 @@ using namespace std;
 
 string Message::asString() const throw() {
 
-    cout << "ID: " << showbase << hex << m_id << endl;
-    cout << "fields: [ QR: " << m_qr << " opCode: " << m_opcode << " ]" << endl;
-    cout << "QDcount: " << m_qdCount << endl;
-    cout << "ANcount: " << m_anCount << endl;
-    cout << "NScount: " << m_nsCount << endl;
-    cout << "ARcount: " << m_arCount << endl;
+    ostringstream text;
+    text << "ID: " << showbase << hex << m_id << endl;
+    text << "\tfields: [ QR: " << m_qr << " opCode: " << m_opcode << " ]" << endl;
+    text << "\tQDcount: " << m_qdCount << endl;
+    text << "\tANcount: " << m_anCount << endl;
+    text << "\tNScount: " << m_nsCount << endl;
+    text << "\tARcount: " << m_arCount << endl;
 
-    cout << "From Message::asString()" << endl;
-
-    return string();
+    return text.str();
 }
 
 void Message::decode_hdr(const char* buffer) throw () {
@@ -61,18 +62,24 @@ void Message::code_hdr(char* buffer) throw () {
 
 void Message::print_buffer(const char* buffer, int size) throw () {
 
-    cout << endl << "Buffer: " << size << " bytes" << endl;
-    cout << "---------------------------------" << setfill('0');
+    ostringstream text;
+
+    text << "Message::print_buffer()" << endl;
+    text << "size: " << size << " bytes" << endl;
+    text << "---------------------------------" << setfill('0');
 
     for (int i = 0; i < size; i++) {
         if ((i % 10) == 0) {
-            cout << endl << setw(2) << i << ": ";
+            text << endl << setw(2) << i << ": ";
         }
         uchar c = buffer[i];
-        cout << hex << setw(2) << int(c) << " " << dec;
+        text << hex << setw(2) << int(c) << " " << dec;
     }
-    cout << endl << setfill(' ');
-    cout << "---------------------------------" << endl;
+    text << endl << setfill(' ');
+    text << "---------------------------------";
+
+    Logger& logger = Logger::instance();
+    logger.trace(text);
 }
 
 int Message::get16bits(const char*& buffer) throw () {
