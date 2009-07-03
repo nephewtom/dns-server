@@ -1,0 +1,9 @@
+ ** Application::run()
+ ** Resolver::init() | filename: hosts
+ ** Resolver::add() | Record: 127.0.0.1-localhost
+ ** Resolver::add() | Record: 193.180.17.140-www.ericsson.es
+ ** Resolver::add() | Record: 209.85.227.103-www.google.com
+ ** Resolver::add() | Record: 65.55.21.250-www.microsoft.com
+ ** Resolver::add() | Record: 17.112.152.32-www.apple.com
+ ** Server::init()
+ ** Server::run()

@@ -1,30 +1,69 @@
-En esta carperta se incluye el dnsServer para el ejercicio de Ericsson.
+DNS server para la prueba de Ericsson.
 
 Guía rápida
 -----------
 
 Ejecutar en un terminal:
-
-> make
-> ./go.bash
+prompt> make
+prompt> ./go.bash
 
 Abrir otro terminal y ejecutar:
+prompt> ./dig-test.bash
 
-> ./dig-test.bash
-
-Se crea el fichero 'dnsServer.log' con las trazas del server.
+Se creará el fichero 'dnsServer.log' con las trazas del server.
 
 
 Información sobre los ficheros y carpetas
 -----------------------------------------
 
-Makefile - Compila y limpia con los targets 'build'(por defecto) y 'clean'.
-go.bash - Lanza el dnsserver con puerto de escucha 9000 y el fichero hosts.
-hosts - Fichero de texto con las correspondencias ipAddress-hostname.
-dig-test.bash - Ejecuta dig con los parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
-src/ - Carpeta con el código fuente
-nbproject/ - Archivos de configuracion de NetBeans.
-build/ - Carpeta creada al compilar donde se dejan los object files.
+Makefile : Generado para Linux con targets 'build'(por defecto) y 'clean'.
+Makefile.Manual : Escrito a mano para otros S.O. como Solaris, HP-UX, etc...
+go.bash : Lanza el dnsserver con puerto de escucha 9000 y el fichero hosts.
+hosts : Fichero de texto con las correspondencias ipAddress-hostname.
+dig-test.bash : Lanza dig con parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
+src/ Carpeta con el código fuente
+uml/ : Diagramas UML de clases y de secuencia del server.
+nbproject/ : Carpeta con los archivos de configuracion del IDE NetBeans.
+
+
+Criterio de diseño
+------------------
+
+En el diseño del servidor, he priorizado la simplicidad y estabilidad sobre la
+eficiencia y la rapidez (un ejemplo claro de ello es el uso de una lista para
+guardar los registros host/ipAddress). Para mejorar estos dos últimos puntos,
+se podrían acometer las siguiente mejoras:
+
+ - Sustitución de la lista de Records por una tabla hash.
+ - Evitar en lo posible la copia de strings, utilizando punteros donde se pueda.
+ - Mejora del Logger con distintos niveles: debug, warning, error, para reducir
+   el volcado de trazas.
+
+Para comprender rápidamente el diseño se recomienda mirar los diagramas UML de
+clases y de secuencia y luego directamente el codigo en C++.
+
+
+Nota Wireshark
+--------------
+
+Si se desea ver el flujo de paquetes entre dig y el dnsserver con wireshark, se
+puede arrancar el dnsserver en el puerto 53, que es el puerto estándar, pero para
+ello es necesario arrancarlo como root (e.g.: sudo -u root ./dnsserver 53 hosts).
+
+Otra forma menos invasiva, es arrancarlo en un puerto como el 9000, capturar los
+paquetes con wireshark y usar la opción de menús: Analyze | Decode as | DNS.
+
+Nota final
+----------
+
+Todos los ficheros que se encuentran en este directorio se pueden visualizar desde
+la dirección de google code:
+
+http://code.google.com/p/dns-server/
+
+Si se dispone de Subversion se puede obtener una copia ejecutando el comando:
+
+prompt> svn checkout http://dns-server.googlecode.com/svn/trunk/ dns-server
 
 
 Enjoy it!
