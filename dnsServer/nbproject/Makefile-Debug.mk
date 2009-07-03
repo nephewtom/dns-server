@@ -32,10 +32,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/main.o \
 	${OBJECTDIR}/src/message.o \
 	${OBJECTDIR}/src/logger.o \
+	${OBJECTDIR}/src/query.o \
 	${OBJECTDIR}/src/server.o \
 	${OBJECTDIR}/src/application.o \
-	${OBJECTDIR}/src/resolver.o \
-	${OBJECTDIR}/src/request.o
+	${OBJECTDIR}/src/resolver.o
 
 # C Compiler Flags
 CFLAGS=
@@ -77,6 +77,11 @@ ${OBJECTDIR}/src/logger.o: src/logger.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/logger.o src/logger.cpp
 
+${OBJECTDIR}/src/query.o: src/query.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/query.o src/query.cpp
+
 ${OBJECTDIR}/src/server.o: src/server.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
@@ -91,11 +96,6 @@ ${OBJECTDIR}/src/resolver.o: src/resolver.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} $@.d
 	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/resolver.o src/resolver.cpp
-
-${OBJECTDIR}/src/request.o: src/request.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} $@.d
-	$(COMPILE.cc) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/request.o src/request.cpp
 
 # Subprojects
 .build-subprojects:
