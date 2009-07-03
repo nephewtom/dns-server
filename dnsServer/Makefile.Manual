@@ -58,3 +58,12 @@ server.o: $(SOURCEDIR)/server.cpp
 clean:
 	$(RM) -f $(CXXOBJECTS) dnsserver dnsserver.log
 
+#
+# Doxygen target
+#
+
+doxy:
+	doxygen doxygen.conf
+
+doxy-clean:
+	$(RM) -rf doxygen

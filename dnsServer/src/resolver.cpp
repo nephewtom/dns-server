@@ -30,6 +30,7 @@ void Resolver::init(const std::string& filename) throw (Exception) {
 
         string text("Could not open file: ");
         text += filename;
+        logger.error(text);
         Exception e(text);
         throw (e);
     }
@@ -58,8 +59,14 @@ void Resolver::store(const string& line) throw () {
     string ipAddress(line, 0, ipAddresEndPos);
     string domainName(line, domainNameStartPos, line.length());
 
-    Record* record = new Record(ipAddress, domainName);
-    add(record);
+    try {
+        Record* record = new Record(ipAddress, domainName);
+        add(record);
+    }
+    catch (exception& e) {
+        Logger& logger = Logger::instance();
+        logger.error("Could not create Record object");
+    }
 }
 
 void Resolver::add(Record* newone) throw() {

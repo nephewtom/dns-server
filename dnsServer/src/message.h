@@ -22,18 +22,26 @@ public:
 
     uint getID() const throw() { return m_id; }
     uint getQdCount() const throw() { return m_qdCount; }
-    //...
+    uint getAnCount() const throw() { return m_anCount; }
+    uint getNsCount() const throw() { return m_nsCount; }
+    uint getArCount() const throw() { return m_arCount; }
 
     void setID(uint id) throw() { m_id = id; }
-    void setAnCount(uint count) throw() { m_anCount = count; }
     void setQdCount(uint count) throw() { m_qdCount = count; }
-    //...
+    void setAnCount(uint count) throw() { m_anCount = count; }
+    void setNsCount(uint count) throw() { m_nsCount = count; }
+    void setArCount(uint count) throw() { m_arCount = count; }
 
 protected:
+    static const uint HDR_OFFSET = 12;
+
     uint m_id;
     uint m_qr;
     uint m_opcode;
-    //...
+    uint m_aa;
+    uint m_tc;
+    uint m_rd;
+    uint m_ra;
     uint m_rcode;
     
     uint m_qdCount;
@@ -41,10 +49,10 @@ protected:
     uint m_nsCount;
     uint m_arCount;
 
-    static const uint HDR_OFFSET = 12;
 
     Message(Type type) : m_qr(type) { }
     virtual ~Message() { }
+    virtual std::string asString() const throw();
 
     void decode_hdr(const char* buffer) throw ();
     void code_hdr(char* buffer) throw ();
@@ -54,13 +62,15 @@ protected:
     void put32bits(char*& buffer, ulong value) throw ();
 
     void print_buffer(const char* buffer, int size) throw();
-    std::string asString() const throw();
     
 private:
-    static const uint QR_MASK = 0x80;
-    static const uint OPCODE_MASK = 0x78;
-    //...
-    static const uint RCODE_MASK = 0x0F;
+    static const uint QR_MASK = 0x8000;
+    static const uint OPCODE_MASK = 0x7800;
+    static const uint AA_MASK = 0x0400;
+    static const uint TC_MASK = 0x0200;
+    static const uint RD_MASK = 0x0100;
+    static const uint RA_MASK = 0x8000;
+    static const uint RCODE_MASK = 0x000F;
 };
 }
 #endif	/* _MESSAGE_H */

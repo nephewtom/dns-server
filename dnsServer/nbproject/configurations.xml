@@ -36,7 +36,9 @@
     <itemPath>dig-test.bash</itemPath>
     <itemPath>go.bash</itemPath>
     <itemPath>hosts</itemPath>
-    <itemPath>README</itemPath>
+    <itemPath>Makefile.Manual</itemPath>
+    <itemPath>README.English</itemPath>
+    <itemPath>README.Spanish</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -53,7 +55,13 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="README">
+      <item path="Makefile.Manual">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="README.English">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="README.Spanish">
         <itemTool>3</itemTool>
       </item>
       <item path="dig-test.bash">
@@ -132,7 +140,13 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="README">
+      <item path="Makefile.Manual">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="README.English">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="README.Spanish">
         <itemTool>3</itemTool>
       </item>
       <item path="dig-test.bash">

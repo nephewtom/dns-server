@@ -36,7 +36,10 @@ void Message::decode_hdr(const char* buffer) throw () {
     uint fields = get16bits(buffer);
     m_qr = fields & QR_MASK;
     m_opcode = fields & OPCODE_MASK;
-    // TODO: Extract rest of fields
+    m_aa = fields & AA_MASK;
+    m_tc = fields & TC_MASK;
+    m_rd = fields & RD_MASK;
+    m_ra = fields & RA_MASK;
 
     m_qdCount = get16bits(buffer);
     m_anCount = get16bits(buffer);
