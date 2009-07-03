@@ -31,8 +31,9 @@ Design Criteria
 
 In the server design, simplicity and stability have been priorized over speed and
 efficiency (the implementation of the host/ipAddress records using a linked list
-is a clear example). Following items can be implemented to improve those last
-two matters:
+is a clear example) and only UDP transport is implemented.
+
+Following items can be implemented to improve those last two matters:
 
  - Change the record link list by a hash table.
  - Avoid when possible to copy strings, using pointer to strings, etc...
@@ -40,7 +41,8 @@ two matters:
    reduce trace dump size.
 
 To grasp easily the server design, it is recomended to take a look at the UML
-class and sequence diagrams and them jump into the C++ source code.
+class and sequence diagrams, then look up Doxygen documentation and finally
+jump into the C++ source code.
 
 
 Compilation on different systems
@@ -69,15 +71,25 @@ If you use Wireshark as the packect sniffer between dig and the dnsserver, you
 can start dnsserver on the standard port 53, but you will need to sudo to root
 user (e.g.: sudo -u root ./dnsserver 53 hosts).
 
-Another less painful way, it is to start it on port 9000, and capture the packets
-with Wireshark and then use menu option: Analyze | Decode as | DNS.
+Another less painful way, it is to start it on port 9000, capture the packets with
+Wireshark, stop the capture and then use menu option:
+Analyze | Decode as | DNS.
 
-Final Note
-----------
+
+Doxygen and Google Code
+-----------------------
+
+Doxygen documentation can be generated with the following make target:
+
+prompt> make -f Makefile.Manual doxy
+
+and reached in the following relative path:
+
+    doxygen/html/index.html
 
 All the files in this directory can be reached from google code address:
 
-http://code.google.com/p/dns-server/
+    http://code.google.com/p/dns-server/
 
 If you have a Subversion client you can get a copy with the following command:
 

@@ -25,7 +25,7 @@ Logger& Logger::instance() throw () {
 
 void Logger::trace(const char* text) throw() {
 
-    _file << " ** " << text << endl;
+    _file << " ## " << text << endl;
 }
 
 void Logger::trace(string& text) throw() {
@@ -36,5 +36,15 @@ void Logger::trace(string& text) throw() {
 void Logger::trace(ostringstream& stream) throw() {
 
     string text = stream.str();
+    trace(text.data());
+}
+
+void Logger::error(const char* text) throw() {
+
+    _file << " !! " << text << endl;
+}
+
+void Logger::error(string& text) throw() {
+
     trace(text.data());
 }
