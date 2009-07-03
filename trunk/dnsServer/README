@@ -18,16 +18,16 @@ Información sobre los ficheros y carpetas
 
 Makefile : Generado para Linux con targets 'build'(por defecto) y 'clean'.
 Makefile.Manual : Escrito a mano para otros sistemas o entornos.
-go.bash : Lanza el dnsserver con puerto de escucha 9000 y el fichero hosts.
+go.bash : Lanza el dnsserver con puerto de escucha 9000 y el fichero 'hosts'.
 hosts : Fichero de texto con las correspondencias ipAddress-hostname.
-dig-test.bash : Lanza dig con parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
+dig-test.bash : Lanza 'dig' con parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
 src/ : Carpeta con el código fuente
 uml/ : Diagramas UML de clases y de secuencia del server.
 nbproject/ : Carpeta con los archivos de configuracion del IDE NetBeans.
 
 
-Criterio de diseño
-------------------
+Criterios de diseño
+-------------------
 
 En el diseño del servidor, se ha priorizado la simplicidad y estabilidad sobre
 la eficiencia y la rapidez (un ejemplo claro de ello es el uso de una lista para
@@ -71,7 +71,7 @@ puede arrancar el dnsserver en el puerto 53, que es el puerto estándar, pero pa
 ello es necesario arrancarlo como root (e.g.: sudo -u root ./dnsserver 53 hosts).
 
 Otra forma menos invasiva, es arrancarlo en un puerto como el 9000, capturar los
-paquetes con wireshark y usar la opción de menús: Analyze | Decode as | DNS.
+paquetes con Wireshark y usar la opción de menús: Analyze | Decode as | DNS.
 
 Nota final
 ----------

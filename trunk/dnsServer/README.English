@@ -1,0 +1,89 @@
+DNS server for Ericsson test.
+
+Quick guide
+-----------
+
+Open a terminal and run:
+prompt> make
+prompt> ./go.bash
+
+Open another terminal and run:
+prompt> ./dig-test.bash
+
+The file 'dnsServer.log' will be created with the tracing info.
+
+
+Info about files and folders
+----------------------------
+
+Makefile : Generated for Linux with 'build'(default) y 'clean' targets.
+Makefile.Manual : Simpler makefile for other systems or environments.
+go.bash : Starts dnsserver with listenig port 9000 and file 'hosts'.
+hosts : Textfile with ipAddress-hostname mappings.
+dig-test.bash : Start 'dig' with parameters: @127.0.0.1 -x 193.180.17.140 -p 9000
+src/ : Source code folder
+uml/ : UML class and sequence diagrams of dnsserver.
+nbproject/ : Netbeans IDE configuration files folder.
+
+
+Design Criteria
+---------------
+
+In the server design, simplicity and stability have been priorized over speed and
+efficiency (the implementation of the host/ipAddress records using a linked list
+is a clear example). Following items can be implemented to improve those last
+two matters:
+
+ - Change the record link list by a hash table.
+ - Avoid when possible to copy strings, using pointer to strings, etc...
+ - Improve Logger class with different trace levels: debug, warning, error, to
+   reduce trace dump size.
+
+To grasp easily the server design, it is recomended to take a look at the UML
+class and sequence diagrams and them jump into the C++ source code.
+
+
+Compilation on different systems
+--------------------------------
+
+The development has been done on a Linux 32 bits box running Fedora 10 distro.
+dnsserver has been tested on 3 different boxes with Linux 32bits, Ĺinux 64bits
+and Windows/Cygwin 32bits.
+
+Netbeans IDE has been used for development and it automatically generates Makefiles.
+A simpler Makefile.Manual was wrote just in case the previous one does not work
+in other operating systems or compilation environments.
+
+As long as I had no access to a Solaris/HP-UX boxes, it could be necessary to
+make some small adaptations in the Makefile.Manual format or in the location or
+name of the libraries needed to link.
+
+However, there should not be necessary to modify source code to compile it if you
+have a relatively modern C++ compiler.
+
+
+Wireshark Note
+--------------
+
+If you use Wireshark as the packect sniffer between dig and the dnsserver, you
+can start dnsserver on the standard port 53, but you will need to sudo to root
+user (e.g.: sudo -u root ./dnsserver 53 hosts).
+
+Another less painful way, it is to start it on port 9000, and capture the packets
+with Wireshark and then use menu option: Analyze | Decode as | DNS.
+
+Final Note
+----------
+
+All the files in this directory can be reached from google code address:
+
+http://code.google.com/p/dns-server/
+
+If you have a Subversion client you can get a copy with the following command:
+
+prompt> svn checkout http://dns-server.googlecode.com/svn/trunk/ dns-server
+
+
+Enjoy it!
+Tom
+
