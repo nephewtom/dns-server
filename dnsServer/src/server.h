@@ -9,6 +9,7 @@
 #define	_DNS_SERVER_H
 
 #include <netinet/in.h>
+
 #include "exception.h"
 #include "query.h"
 #include "response.h"

@@ -1,11 +1,13 @@
 /* 
  * File:   response.cpp
- * Author: torti
+ * Author: tomas
  * 
- * Created on 29 de junio de 2009, 3:45
+ * Created on 29 de junio de 2009, 4:45
  */
 #include <iostream>
+#include <sstream>
 
+#include "logger.h"
 #include "message.h"
 #include "response.h"
 
@@ -14,31 +16,42 @@ using namespace dns;
 
 string Response::asString() const throw() {
 
-    Message::asString();
+    ostringstream text;
+    text << endl << "RESPONSE { ";
+    text << Message::asString();
 
-    cout << "name: " << m_name << endl;
-    cout << "type: " << m_type << endl;
-    cout << "class: " << m_class << endl;
-    cout << "ttl: " << m_ttl << endl;
-    cout << "rdLength: " << m_rdLength << endl;
-    cout << "rdata: " << m_rdata << endl << noshowbase << dec;
+    text << "\tname: " << m_name << endl;
+    text << "\ttype: " << m_type << endl;
+    text << "\tclass: " << m_class << endl;
+    text << "\tttl: " << m_ttl << endl;
+    text << "\trdLength: " << m_rdLength << endl;
+    text << "\trdata: " << m_rdata << " }" << noshowbase << dec;
 
-    return string();
+    return text.str();
 }
 
 int Response::code(char* buffer) throw() {
+
+    Logger& logger = Logger::instance();
+    logger.trace("Response::code()");
 
     char* bufferBegin = buffer;
 
     code_hdr(buffer);
     buffer += HDR_OFFSET;
 
-    code_name(buffer);
+    // Code Question section
+    code_domain(buffer, m_name);
+    put16bits(buffer, m_type);
+    put16bits(buffer, m_class);
 
+    // Code Answer section
+    code_domain(buffer, m_name);
     put16bits(buffer, m_type);
     put16bits(buffer, m_class);
     put32bits(buffer, m_ttl);
     put16bits(buffer, m_rdLength);
+    code_domain(buffer, m_rdata);
     
     int size = buffer - bufferBegin;
     print_buffer(bufferBegin, size);
@@ -46,24 +59,24 @@ int Response::code(char* buffer) throw() {
     return size;
 }
 
-void Response::code_name(char*& buffer) throw() {
+void Response::code_domain(char*& buffer, const string& domain) throw() {
 
-    int start, end; // indexes
+    int start(0), end; // indexes
 
-    while ((end = m_name.find('.', start)) != string::npos) {
+    while ((end = domain.find('.', start)) != string::npos) {
 
         *buffer++ = end - start; // label length octet
         for (int i=start; i<end; i++) {
 
-            *buffer++ = m_name[i]; // label octets
+            *buffer++ = domain[i]; // label octets
         }
         start = end + 1; // Skip '.'
     }
 
-    *buffer++ = m_name.size() - start; // last label length octet
-    for (int i=start; i<m_name.size(); i++) {
+    *buffer++ = domain.size() - start; // last label length octet
+    for (int i=start; i<domain.size(); i++) {
 
-        *buffer++ = m_name[i]; // last label octets
+        *buffer++ = domain[i]; // last label octets
     }
 
     *buffer++ = 0;

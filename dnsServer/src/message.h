@@ -1,6 +1,6 @@
 /* 
  * File:   message.h
- * Author: torti
+ * Author: tomas
  *
  * Created on 29 de junio de 2009, 17:39
  */
@@ -26,6 +26,7 @@ public:
 
     void setID(uint id) throw() { m_id = id; }
     void setAnCount(uint count) throw() { m_anCount = count; }
+    void setQdCount(uint count) throw() { m_qdCount = count; }
     //...
 
 protected:

@@ -8,17 +8,27 @@
 #ifndef _DNS_LOGGER_H
 #define	_DNS_LOGGER_H
 
+#include <fstream>
+#include <sstream>
+#include <string>
+
 namespace dns {
 
 class Logger {
 public:
     static Logger& instance() throw ();
 
+    void trace(const char* text) throw();
+    void trace(std::string& text) throw();
+    void trace(std::ostringstream& text) throw();
+
 protected:
     Logger() { }
+    ~Logger() { _file.close(); }
 
 private:
     static Logger* _instance;
+    static std::ofstream _file;
 
 };
 }

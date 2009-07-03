@@ -1,8 +1,8 @@
 /* 
  * File:   response.h
- * Author: torti
+ * Author: tomas
  *
- * Created on 29 de junio de 2009, 3:45
+ * Created on 29 de junio de 2009, 4:45
  */
 
 #ifndef _DNS_RESPONSE_H
@@ -21,9 +21,13 @@ public:
     virtual ~Response() { }
 
     void setRCode(Code code) throw() { m_rcode = code; }
-    void setName(const std::string& name) throw() { m_name = name; }
-    void setType(const int value) throw() { m_type = value; }
-    void setClass(const int value) throw() { m_class = value; }
+    void setName(const std::string& value) throw() { m_name = value; }
+    void setType(const uint value) throw() { m_type = value; }
+    void setClass(const uint value) throw() { m_class = value; }
+    void setTtl(const uint value) throw() { m_ttl = value; }
+    void setRdLength(const uint value) throw() { m_rdLength = value; }
+    void setRdata(const std::string& value) throw() { m_rdata = value; }
+
     std::string asString() const throw();
 
     int code(char* buffer) throw();
@@ -36,7 +40,7 @@ private:
     uint m_rdLength;
     std::string m_rdata;
 
-    void code_name(char*& buffer) throw();
+    void code_domain(char*& buffer, const std::string& domain) throw();
 };
 }
 #endif	/* _RESPONSE_H */

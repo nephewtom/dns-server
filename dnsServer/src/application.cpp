@@ -2,13 +2,14 @@
  * File:   application.cpp
  * Author: tomas
  * 
- * Created on June 27, 2009, 11:20 AM
+ * Created on June 27, 2009, 16:20 AM
  */
 
 #include <iostream>
-#include <stdlib.h>
+#include <stdlib.h> //atoi
 
 #include "application.h"
+#include "logger.h"
 #include "exception.h"
 
 using namespace dns;
@@ -33,12 +34,12 @@ void Application::parse_arguments(int argc, char** argv) throw (Exception) {
     }
 
     m_filename.assign(argv[2]);
-
-    cout << "m_argPort:" << m_port << endl;
-    cout << "m_argFile: " << m_filename << endl;
 }
 
 void Application::run() throw (Exception) {
+
+    Logger& logger = Logger::instance();
+    logger.trace("Application::run()");
 
     m_resolver.init(m_filename);
     m_server.init(m_port);

@@ -1,0 +1,32 @@
+En esta carperta se incluye el dnsServer para el ejercicio de Ericsson.
+
+Guía rápida
+-----------
+
+Ejecutar en un terminal:
+
+> make
+> ./go.bash
+
+Abrir otro terminal y ejecutar:
+
+> ./dig-test.bash
+
+Se crea el fichero 'dnsServer.log' con las trazas del server.
+
+
+Información sobre los ficheros y carpetas
+-----------------------------------------
+
+Makefile - Compila y limpia con los targets 'build'(por defecto) y 'clean'.
+go.bash - Lanza el dnsserver con puerto de escucha 9000 y el fichero hosts.
+hosts - Fichero de texto con las correspondencias ipAddress-hostname.
+dig-test.bash - Ejecuta dig con los parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
+src/ - Carpeta con el código fuente
+build/ - Carpeta donde se generan los object files de la compilación.
+nbproject/ - Archivos de configuracion de NetBeans.
+
+
+Enjoy it!
+Tom
+
