@@ -17,11 +17,11 @@ Información sobre los ficheros y carpetas
 -----------------------------------------
 
 Makefile : Generado para Linux con targets 'build'(por defecto) y 'clean'.
-Makefile.Manual : Escrito a mano para otros S.O. como Solaris, HP-UX, etc...
+Makefile.Manual : Escrito a mano para otros sistemas o entornos.
 go.bash : Lanza el dnsserver con puerto de escucha 9000 y el fichero hosts.
 hosts : Fichero de texto con las correspondencias ipAddress-hostname.
 dig-test.bash : Lanza dig con parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
-src/ Carpeta con el código fuente
+src/ : Carpeta con el código fuente
 uml/ : Diagramas UML de clases y de secuencia del server.
 nbproject/ : Carpeta con los archivos de configuracion del IDE NetBeans.
 
@@ -52,13 +52,15 @@ maquina Windows 32bits con Cygwin.
 
 Para el desarrollo se ha empleado el IDE Netbeans, que genera automáticamente
 los Makefiles. Por ello se suministra un Makefile.Manual más sencillo, por si el
-Makefile generado por Netbeans no funciona en otros sistemas.
+Makefile generado por Netbeans no funciona en otros sistemas operativos o
+entornos de compilación.
 
 Como no se ha tenido acceso a maquinas Solaris/HP-UX, puede que sean necesarias
-algunas pequeñas adaptaciones en el formato del Makefile o en la ubicación o
-nombre de las librerias con las que linkar. El codigo no debería necesitar
-ninguna modificación para poder compilarse si se dispone de un compilador
-estándar C++ relativamente moderno.
+algunas pequeñas adaptaciones en el formato del Makefile.Manual o en la
+ubicación o nombre de las librerias con las que linkar.
+
+El codigo fuente, sin embargo, no debe necesitar ninguna modificación para poder
+compilarse si se dispone de un compilador estándar C++ relativamente moderno.
 
 
 Nota Wireshark
