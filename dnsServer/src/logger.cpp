@@ -12,7 +12,7 @@ using namespace std;
 
 // static
 Logger* Logger::_instance = 0;
-ofstream Logger::_file("dnsServer.log", ios::out|ios::trunc);
+ofstream Logger::_file("dnsserver.log", ios::out|ios::trunc);
 
 Logger& Logger::instance() throw () {
 
