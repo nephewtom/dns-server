@@ -29,8 +29,8 @@ nbproject/ : Carpeta con los archivos de configuracion del IDE NetBeans.
 Criterio de diseño
 ------------------
 
-En el diseño del servidor, he priorizado la simplicidad y estabilidad sobre la
-eficiencia y la rapidez (un ejemplo claro de ello es el uso de una lista para
+En el diseño del servidor, se ha priorizado la simplicidad y estabilidad sobre
+la eficiencia y la rapidez (un ejemplo claro de ello es el uso de una lista para
 guardar los registros host/ipAddress). Para mejorar estos dos últimos puntos,
 se podrían acometer las siguiente mejoras:
 
@@ -41,6 +41,24 @@ se podrían acometer las siguiente mejoras:
 
 Para comprender rápidamente el diseño se recomienda mirar los diagramas UML de
 clases y de secuencia y luego directamente el codigo en C++.
+
+
+Compilación en distintos sistemas
+---------------------------------
+
+El desarrollo se ha realizado sobre Linux 32bits con la distribución Fedora 10.
+El server se ha probado en maquinas con Linux 32bits, Ĺinux 64bits y sobre una
+maquina Windows 32bits con Cygwin.
+
+Para el desarrollo se ha empleado el IDE Netbeans, que genera automáticamente
+los Makefiles. Por ello se suministra un Makefile.Manual más sencillo, por si el
+Makefile generado por Netbeans no funciona en otros sistemas.
+
+Como no se ha tenido acceso a maquinas Solaris/HP-UX, puede que sean necesarias
+algunas pequeñas adaptaciones en el formato del Makefile o en la ubicación o
+nombre de las librerias con las que linkar. El codigo no debería necesitar
+ninguna modificación para poder compilarse si se dispone de un compilador
+estándar C++ relativamente moderno.
 
 
 Nota Wireshark
@@ -56,12 +74,12 @@ paquetes con wireshark y usar la opción de menús: Analyze | Decode as | DNS.
 Nota final
 ----------
 
-Todos los ficheros que se encuentran en este directorio se pueden visualizar desde
-la dirección de google code:
+Todos los ficheros que se encuentran en este directorio se pueden visualizar
+desde la dirección de google code:
 
 http://code.google.com/p/dns-server/
 
-Si se dispone de Subversion se puede obtener una copia ejecutando el comando:
+Si se dispone de Subversion se puede obtener una copia del código con el comando:
 
 prompt> svn checkout http://dns-server.googlecode.com/svn/trunk/ dns-server
 
