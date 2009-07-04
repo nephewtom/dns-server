@@ -25,9 +25,14 @@ string Response::asString() const throw() {
     text << "\tclass: " << m_class << endl;
     text << "\tttl: " << m_ttl << endl;
     text << "\trdLength: " << m_rdLength << endl;
-    text << "\trdata: " << m_rdata << " }" << noshowbase << dec;
+    text << "\trdata: " << m_rdata << " }" << dec;
 
     return text.str();
+}
+
+void Response::decode(const char* buffer, int size) throw() {
+
+    // Only needed for the DNS client
 }
 
 int Response::code(char* buffer) throw() {
@@ -54,12 +59,12 @@ int Response::code(char* buffer) throw() {
     code_domain(buffer, m_rdata);
     
     int size = buffer - bufferBegin;
-    print_buffer(bufferBegin, size);
+    log_buffer(bufferBegin, size);
 
     return size;
 }
 
-void Response::code_domain(char*& buffer, const string& domain) throw() {
+void Response::code_domain(char*& buffer, const std::string& domain) throw() {
 
     int start(0), end; // indexes
 

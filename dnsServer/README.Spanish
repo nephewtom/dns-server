@@ -19,11 +19,11 @@ Información sobre los ficheros y carpetas
 Makefile : Generado para Linux con targets 'build'(por defecto) y 'clean'.
 Makefile.Manual : Escrito a mano para otros sistemas o entornos.
 go.bash : Lanza el dnsserver con puerto de escucha 9000 y el fichero 'hosts'.
-hosts : Fichero de texto con las correspondencias ipAddress-hostname.
 dig-test.bash : Lanza 'dig' con parametros: @127.0.0.1 -x 193.180.17.140 -p 9000
+hosts : Fichero de texto con las correspondencias ipAddress-hostname.
+doxygen.conf : Fichero de configuración de Doxygen.
 src/ : Carpeta con el código fuente
 uml/ : Diagramas UML de clases y de secuencia del server.
-doxygen/ : Documentación generada con Doxygen.
 nbproject/ : Carpeta con los archivos de configuracion del IDE NetBeans.
 
 
@@ -82,11 +82,12 @@ Analyze | Decode as | DNS.
 Doxygen y Google code
 ---------------------
 
-La documentación de Doxygen se puede generar con el siguiente makefile target:
+La documentación de Doxygen se puede generar y borrar con los makefile targets:
 
 prompt> make -f Makefile.Manual doxy
+prompt> make -f Makefile.Manual doxy-clean
 
-y se puede visualizar en el path:
+y se puede visualizar en el path relativo:
 
     doxygen/html/index.html
 

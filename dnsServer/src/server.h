@@ -28,7 +28,7 @@ public:
     /**
      *  Constructor.
      *  Creates a socket Server.
-     *  @param resolver The @Resolver from the application.
+     *  @param resolver The object @ref Resolver from the application.
      */
     Server(Resolver& resolver) : m_resolver(resolver)
         { }
@@ -64,5 +64,5 @@ private:
 };
 }
 
-#endif	/* _SERVER_H */
+#endif	/* _DNS_SERVER_H */
 
