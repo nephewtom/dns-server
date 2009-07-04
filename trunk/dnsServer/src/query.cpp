@@ -21,17 +21,22 @@ string Query::asString() const throw() {
     text << "\tQname: " << m_qName << endl;
     text << "\tQtype: " << m_qType << endl;
     text << "\tQclass: " << m_qClass;
-    text << " }" << noshowbase << dec;
+    text << " }" << dec;
 
     return text.str();
+}
+
+int Query::code(char* buffer) throw() {
+
+    // Only needed for the DNS client
+    return 0;
 }
 
 void Query::decode(const char* buffer, int size) throw() {
 
     Logger& logger = Logger::instance();
     logger.trace("Query::decode()");
-
-    print_buffer(buffer, size);
+    log_buffer(buffer, size);
 
     decode_hdr(buffer);
     buffer += HDR_OFFSET;

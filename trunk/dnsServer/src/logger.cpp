@@ -28,12 +28,12 @@ void Logger::trace(const char* text) throw() {
     _file << " ## " << text << endl;
 }
 
-void Logger::trace(string& text) throw() {
+void Logger::trace(std::string& text) throw() {
 
     trace(text.data());
 }
 
-void Logger::trace(ostringstream& stream) throw() {
+void Logger::trace(std::ostringstream& stream) throw() {
 
     string text = stream.str();
     trace(text.data());
@@ -44,7 +44,7 @@ void Logger::error(const char* text) throw() {
     _file << " !! " << text << endl;
 }
 
-void Logger::error(string& text) throw() {
+void Logger::error(std::string& text) throw() {
 
     trace(text.data());
 }

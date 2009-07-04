@@ -27,7 +27,8 @@ public:
     virtual ~Exception() throw() { }
 
     /**
-     *  Returns the information text
+     *  Returns the information text string
+     *  @return The information text
      */
     const char* what() const throw() {
         
@@ -38,5 +39,5 @@ private:
     std::string m_text;
 };
 }
-#endif	/* _EXCEPTION_H */
+#endif	/* _DNS_EXCEPTION_H */
 

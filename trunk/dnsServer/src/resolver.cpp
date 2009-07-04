@@ -47,7 +47,7 @@ void Resolver::init(const std::string& filename) throw (Exception) {
     print_records();
 }
 
-void Resolver::store(const string& line) throw () {
+void Resolver::store(const std::string& line) throw () {
 
     string::size_type ipAddresEndPos = line.find_first_of(" ");
     if (ipAddresEndPos == string::npos) return;
@@ -119,7 +119,7 @@ void Resolver::print_records() throw() {
     cout << endl;
 }
 
-const string Resolver::find(const string& ipAddress) throw () {
+const string Resolver::find(const std::string& ipAddress) throw () {
 
     Logger& logger = Logger::instance();
     string text("Resolver::find() | ipAddres: ");
@@ -183,7 +183,7 @@ void Resolver::process(const Query& query, Response& response) throw () {
     logger.trace(text);
 }
 
-string Resolver::convert(const string& qName) throw() {
+string Resolver::convert(const std::string& qName) throw() {
 
     int pos = qName.find(".in-addr.arpa");
     if (pos == string::npos) return string();

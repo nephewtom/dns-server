@@ -22,6 +22,7 @@ class Logger {
 public:
     /**
      *  Instanciates the one and only Logger object.
+     *  @return A reference to the one and only Logger object.
      */
     static Logger& instance() throw ();
 

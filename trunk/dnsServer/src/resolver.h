@@ -62,9 +62,9 @@ protected:
      */
     struct Record {
         /**
-         *  Constructor
+         *  Constructor.
          *  @param ip String holding the IP address in dot notation.
-         *  @paran domain String holding the domain name.
+         *  @param domain String holding the domain name.
          */
         Record(std::string& ip, std::string& domain) : ipAddress(ip),
                domainName(domain), next(0) { }
@@ -86,7 +86,7 @@ protected:
         std::string domainName;
 
         /**
-         *  Pointer to next @Record on the list
+         *  Pointer to next record on the list
          */
         Record* next;
     };
@@ -115,15 +115,17 @@ protected:
     /**
      *  Covert IN-ADDR.ARPA domain to an IP addrress in dot notation
      *  @param domain The domain name
+     *  @return The IP addrress formatted in dot notation.
      */
     std::string convert(const std::string& domain) throw();
 
     /**
      *  Finds in the list the domanin corresponding to the ipAddress
      *  @param ipAddress IP addrress in dot notation
+     *  @return The domain name found. An empty string if no domain was found.
      */
     const std::string find(const std::string& ipAddress) throw ();
 };
 }
-#endif	/* _RESOLVER_H */
+#endif	/* _DNS_RESOLVER_H */
 

@@ -19,8 +19,9 @@ Info about files and folders
 Makefile : Generated for Linux with 'build'(default) y 'clean' targets.
 Makefile.Manual : Simpler makefile for other systems or environments.
 go.bash : Starts dnsserver with listenig port 9000 and file 'hosts'.
-hosts : Textfile with ipAddress-hostname mappings.
 dig-test.bash : Start 'dig' with parameters: @127.0.0.1 -x 193.180.17.140 -p 9000
+hosts : Textfile with ipAddress-hostname mappings.
+doxygen.conf : Configuration file for Doxygen.
 src/ : Source code folder
 uml/ : UML class and sequence diagrams of dnsserver.
 nbproject/ : Netbeans IDE configuration files folder.
@@ -79,15 +80,16 @@ Analyze | Decode as | DNS.
 Doxygen and Google Code
 -----------------------
 
-Doxygen documentation can be generated with the following make target:
+Doxygen documentation can be generated and clean with the following make targets:
 
 prompt> make -f Makefile.Manual doxy
+prompt> make -f Makefile.Manual doxy-clean
 
-and reached in the following relative path:
+and it can reached in the following relative path:
 
     doxygen/html/index.html
 
-All the files in this directory can be reached from google code address:
+The files in this directory can be reached from google code address:
 
     http://code.google.com/p/dns-server/
 

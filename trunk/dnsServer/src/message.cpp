@@ -19,7 +19,7 @@ using namespace std;
 string Message::asString() const throw() {
 
     ostringstream text;
-    text << "ID: " << showbase << hex << m_id << endl;
+    text << "ID: " << showbase << hex << m_id << endl << noshowbase;
     text << "\tfields: [ QR: " << m_qr << " opCode: " << m_opcode << " ]" << endl;
     text << "\tQDcount: " << m_qdCount << endl;
     text << "\tANcount: " << m_anCount << endl;
@@ -63,11 +63,11 @@ void Message::code_hdr(char* buffer) throw () {
     put16bits(buffer, m_arCount);
 }
 
-void Message::print_buffer(const char* buffer, int size) throw () {
+void Message::log_buffer(const char* buffer, int size) throw () {
 
     ostringstream text;
 
-    text << "Message::print_buffer()" << endl;
+    text << "Message::log_buffer()" << endl;
     text << "size: " << size << " bytes" << endl;
     text << "---------------------------------" << setfill('0');
 
