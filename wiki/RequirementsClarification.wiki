@@ -1,4 +1,4 @@
-#summary Ambiguity in the the requirements
+#summary Ambiguity in the requirements
 
 * Ambigüedad en los requisitos planteados:*
 
