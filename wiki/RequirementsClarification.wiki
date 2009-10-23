@@ -1,6 +1,6 @@
 #summary Ambiguity in the the requirements
 
-=Problema/Duda con los requisitos planteados:=
+* Ambigüedad en los requisitos planteados:*
 
 *1)* En los requisitos se indica que se debe dar soporte de DNS Inverse Query únicamente.
 
