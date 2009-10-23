@@ -1,7 +1,6 @@
-#summary One-sentence summary of this page.
+#summary Ambiguity in the the requirements
 
-= Introduction =
-*Problema/Duda con los requisitos planteados:*
+=Problema/Duda con los requisitos planteados:=
 
 *1)* En los requisitos se indica que se debe dar soporte de DNS Inverse Query únicamente.
 
